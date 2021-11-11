@@ -1,17 +1,25 @@
-package com.example.toygithub
+package com.example.toygithub.ui
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.toygithub.R
 import com.example.toygithub.databinding.ActivityMainBinding
+import com.example.toygithub.ui.github.GithubApiFragment
+import com.example.toygithub.ui.github.GithubLocalFragment
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    private val githubViewModel by viewModels<GithubViewModel>()
 
     private val tabConfigurationStrategy =
         TabLayoutMediator.TabConfigurationStrategy { tab, position ->
