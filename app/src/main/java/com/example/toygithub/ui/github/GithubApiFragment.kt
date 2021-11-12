@@ -1,38 +1,25 @@
 package com.example.toygithub.ui.github
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.example.toygithub.R
+import com.example.toygithub.base.BaseFragment
+import com.example.toygithub.base.ViewState
 import com.example.toygithub.databinding.FragmentGithubApiBinding
-import com.example.toygithub.ui.GithubViewModel
 import com.example.toygithub.ui.adapter.ApiAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class GithubApiFragment : Fragment() {
+class GithubApiFragment : BaseFragment<FragmentGithubApiBinding>(R.layout.fragment_github_api) {
 
-    private val githubViewModel by activityViewModels<GithubViewModel>()
+    private val githubHomeViewModel by activityViewModels<GithubHomeViewModel>()
 
-    private lateinit var binding: FragmentGithubApiBinding
+    private val githubApiViewModel by viewModels<GithubApiViewModel>()
 
     private val apiAdapter by lazy { ApiAdapter() }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_github_api, container, false)
-        binding.lifecycleOwner = this
-        binding.viewModel = githubViewModel
-        return binding.root
-    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,16 +34,57 @@ class GithubApiFragment : Fragment() {
         binding.rvApi.run {
             adapter = apiAdapter
         }
-        apiAdapter.clear()
+        apiAdapter.setOnItemClickListener { entity, isBookmark ->
+            githubApiViewModel.toggleBookmark(entity, isBookmark)
+//            apiAdapter.updateItem(entity)
+        }
     }
 
     private fun initViewModel() {
 
-        githubViewModel.githubViewStateLiveData.observe(viewLifecycleOwner) { viewState ->
-            when (viewState) {
-                is GithubViewModel.GithubViewState.GetSearchUser -> {
-                    apiAdapter.addAll(viewState.list)
-                }
+        binding.viewModel = githubApiViewModel
+
+        githubHomeViewModel.viewStateLiveData.observe(viewLifecycleOwner) { viewState: ViewState? ->
+            (viewState as? GithubHomeViewModel.GithubViewState)?.let {
+                onChangedHomeViewState(
+                    viewState
+                )
+            }
+        }
+
+        githubApiViewModel.viewStateLiveData.observe(viewLifecycleOwner) { viewState: ViewState? ->
+            (viewState as? GithubApiViewModel.GithubApiViewState)?.let {
+                onChangedApiViewState(
+                    viewState
+                )
+            }
+        }
+    }
+
+    private fun onChangedHomeViewState(viewState: GithubHomeViewModel.GithubViewState) {
+        when (viewState) {
+            is GithubHomeViewModel.GithubViewState.AddBookmark -> {
+
+            }
+
+            is GithubHomeViewModel.GithubViewState.DeleteBookmark -> {
+                apiAdapter.updateItem(viewState.item)
+            }
+        }
+    }
+
+    private fun onChangedApiViewState(viewState: GithubApiViewModel.GithubApiViewState) {
+        when (viewState) {
+            is GithubApiViewModel.GithubApiViewState.AddBookmark -> {
+                githubHomeViewModel.addBookmark(viewState.item)
+            }
+
+            is GithubApiViewModel.GithubApiViewState.DeleteBookmark -> {
+                githubHomeViewModel.deleteBookmark(viewState.item)
+            }
+
+            is GithubApiViewModel.GithubApiViewState.GetSearchUser -> {
+                apiAdapter.addAll(viewState.list)
             }
         }
     }
