@@ -1,15 +1,9 @@
-package com.example.toygithub.data.repo
+package com.example.toygithub.data.source.local
 
-import com.example.toygithub.api.response.GithubSearchResponse
 import com.example.toygithub.room.GithubEntity
 import com.example.toygithub.util.Result
 
-interface GithubRepository {
-
-    suspend fun searchUser(
-        userId: String
-    ): Result<GithubSearchResponse>
-
+interface GithubLocalDataSource {
 
     suspend fun registerGithubEntity(entity: GithubEntity): Boolean
 
@@ -22,5 +16,4 @@ interface GithubRepository {
     suspend fun deleteGithubEntity(entity: GithubEntity): Boolean
 
     suspend fun isExistGithubEntity(entity: GithubEntity): Boolean
-
 }
