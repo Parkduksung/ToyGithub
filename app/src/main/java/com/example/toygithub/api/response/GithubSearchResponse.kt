@@ -1,5 +1,6 @@
 package com.example.toygithub.api.response
 
+import com.example.toygithub.room.GithubEntity
 import com.google.gson.annotations.SerializedName
 
 
@@ -29,4 +30,27 @@ data class SearchResponseItem(
     @SerializedName("subscriptions_url") var subscriptions_url: String? = null,
     @SerializedName("type") var type: String? = null,
     @SerializedName("url") var url: String? = null
-)
+) {
+    fun toGithubEntity(): GithubEntity =
+        GithubEntity(
+            avatar_url = avatar_url,
+            events_url = events_url,
+            followers_url = followers_url,
+            following_url = following_url,
+            gists_url = gists_url,
+            gravatar_id = gravatar_id,
+            html_url = html_url,
+            id = id,
+            login = login,
+            node_id = node_id,
+            organizations_url = organizations_url,
+            received_events_url = received_events_url,
+            repos_url = repos_url,
+            score = score,
+            site_admin = site_admin,
+            starred_url = starred_url,
+            subscriptions_url = subscriptions_url,
+            type = type,
+            url = url
+        )
+}
