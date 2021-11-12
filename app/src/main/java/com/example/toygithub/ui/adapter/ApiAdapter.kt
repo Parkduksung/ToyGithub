@@ -1,34 +1,48 @@
 package com.example.toygithub.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.toygithub.R
-import com.example.toygithub.api.response.SearchResponseItem
 import com.example.toygithub.databinding.ItemApiBinding
+import com.example.toygithub.room.GithubEntity
 
 class ApiAdapter : RecyclerView.Adapter<ApiViewHolder>() {
 
-    private val searchItemList = mutableListOf<SearchResponseItem>()
+    private val githubEntityList = mutableListOf<GithubEntity>()
+
+    private lateinit var onItemClick: (entity: GithubEntity, isBookmark: Boolean) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApiViewHolder =
         ApiViewHolder(parent)
 
     override fun onBindViewHolder(holder: ApiViewHolder, position: Int) {
-        holder.bind(searchItemList[position])
+        holder.bind(githubEntityList[position], onItemClick)
     }
 
     override fun getItemCount(): Int =
-        searchItemList.size
+        githubEntityList.size
 
-    fun addAll(list: List<SearchResponseItem>) {
-        searchItemList.addAll(list)
+    fun setOnItemClickListener(listener: (entity: GithubEntity, isBookmark: Boolean) -> Unit) {
+        onItemClick = listener
+    }
+
+    fun addAll(list: List<GithubEntity>) {
+        githubEntityList.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    fun updateItem(entity: GithubEntity) {
+        val searchEntity = githubEntityList.first { it.id == entity.id }
+        val index = githubEntityList.indexOf(searchEntity)
+        githubEntityList[index] = entity.copy(like = !entity.like!!)
         notifyDataSetChanged()
     }
 
     fun clear() {
-        searchItemList.clear()
+        githubEntityList.clear()
         notifyDataSetChanged()
     }
 }
@@ -41,16 +55,18 @@ class ApiViewHolder(viewGroup: ViewGroup) :
 
     private val binding = ItemApiBinding.bind(itemView)
 
-    fun bind(item: SearchResponseItem) {
-
+    fun bind(
+        entity: GithubEntity,
+        onItemClick: (entity: GithubEntity, isBookmark: Boolean) -> Unit
+    ) {
+        Log.d("결과", "여기 다시탐??")
+        Log.d("결과", entity.like.toString())
         with(binding) {
-
-            Glide.with(itemView.context).load(item.avatar_url).into(image)
-
-            user.text = item.login
-
+            Glide.with(itemView.context).load(entity.avatar_url).into(image)
+            user.text = entity.login
+            bookmark.isChecked = entity.like!!
+            bookmark.setOnClickListener { onItemClick(entity, bookmark.isChecked) }
         }
-
     }
 }
 
