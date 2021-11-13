@@ -20,20 +20,6 @@ class GithubLocalDataSourceImpl @Inject constructor(private val githubDao: Githu
             }
         }
 
-    override suspend fun isExistGithubEntityList(): Boolean = withContext(Dispatchers.IO) {
-        return@withContext githubDao.getAll().isNotEmpty()
-    }
-
-
-    override suspend fun getAllGithubEntity(): Result<List<GithubEntity>> =
-        withContext(Dispatchers.IO) {
-            return@withContext try {
-                Result.Success(githubDao.getAll())
-            } catch (e: Exception) {
-                Result.Error(Exception("Error getAllSSGEntity!"))
-            }
-        }
-
     override suspend fun deleteGithubEntity(entity: GithubEntity): Boolean =
         withContext(Dispatchers.IO) {
             return@withContext try {

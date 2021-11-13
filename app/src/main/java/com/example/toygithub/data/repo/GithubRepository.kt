@@ -13,10 +13,6 @@ interface GithubRepository {
 
     suspend fun registerGithubEntity(entity: GithubEntity): Boolean
 
-    suspend fun isExistGithubEntityList(): Boolean
-
-    suspend fun getAllGithubEntity(): Result<List<GithubEntity>>
-
     suspend fun getAllBookmarkEntity(): Result<List<GithubEntity>>
 
     suspend fun deleteGithubEntity(entity: GithubEntity): Boolean

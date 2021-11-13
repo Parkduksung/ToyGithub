@@ -25,15 +25,6 @@ class GithubRepositoryImpl @Inject constructor(
             return@withContext githubLocalDataSource.registerGithubEntity(entity)
         }
 
-    override suspend fun isExistGithubEntityList(): Boolean = withContext(Dispatchers.IO) {
-        return@withContext githubLocalDataSource.isExistGithubEntityList()
-    }
-
-    override suspend fun getAllGithubEntity(): Result<List<GithubEntity>> =
-        withContext(Dispatchers.IO) {
-            return@withContext githubLocalDataSource.getAllGithubEntity()
-        }
-
     override suspend fun deleteGithubEntity(entity: GithubEntity): Boolean =
         withContext(Dispatchers.IO) {
             return@withContext githubLocalDataSource.deleteGithubEntity(entity)
