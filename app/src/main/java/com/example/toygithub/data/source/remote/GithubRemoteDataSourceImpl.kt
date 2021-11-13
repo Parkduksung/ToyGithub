@@ -15,7 +15,7 @@ class GithubRemoteDataSourceImpl @Inject constructor(private val githubApi: Gith
             return@withContext try {
                 Result.Success(githubApi.getGithubUser(q = userId).execute().body()!!)
             } catch (e: Exception) {
-                Result.Error(e)
+                Result.Error(Exception("Error GithubSearchResponse!"))
             }
         }
 }
