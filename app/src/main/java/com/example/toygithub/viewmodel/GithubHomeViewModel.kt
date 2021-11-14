@@ -17,18 +17,10 @@ class GithubHomeViewModel @Inject constructor(
 
     fun addBookmark(entity: GithubEntity) {
         ioScope.launch {
-            if (githubRepository.isExistGithubEntity(entity)) {
-                if (githubRepository.registerGithubEntity(entity.copy(like = true))) {
-                    viewStateChanged(GithubViewState.AddBookmark(entity.copy(like = true)))
-                } else {
-                    viewStateChanged(GithubViewState.ErrorAddBookmark)
-                }
+            if (githubRepository.registerGithubEntity(entity.copy(like = true))) {
+                viewStateChanged(GithubHomeViewState.AddBookmark(entity.copy(like = true)))
             } else {
-                if (githubRepository.registerGithubEntity(entity.copy(like = true))) {
-                    viewStateChanged(GithubViewState.AddBookmark(entity.copy(like = true)))
-                } else {
-                    viewStateChanged(GithubViewState.ErrorAddBookmark)
-                }
+                viewStateChanged(GithubHomeViewState.ErrorAddBookmark)
             }
         }
     }
@@ -36,21 +28,19 @@ class GithubHomeViewModel @Inject constructor(
     fun deleteBookmark(entity: GithubEntity) {
         ioScope.launch {
             if (githubRepository.deleteGithubEntity(entity)) {
-                viewStateChanged(GithubViewState.DeleteBookmark(entity))
+                viewStateChanged(GithubHomeViewState.DeleteBookmark(entity))
             } else {
-                viewStateChanged(GithubViewState.ErrorDeleteBookmark)
+                viewStateChanged(GithubHomeViewState.ErrorDeleteBookmark)
             }
         }
     }
 
 
-
-
-    sealed class GithubViewState : ViewState {
-        data class AddBookmark(val item: GithubEntity) : GithubViewState()
-        data class DeleteBookmark(val item: GithubEntity) : GithubViewState()
-        object ErrorAddBookmark : GithubViewState()
-        object ErrorDeleteBookmark : GithubViewState()
+    sealed class GithubHomeViewState : ViewState {
+        data class AddBookmark(val item: GithubEntity) : GithubHomeViewState()
+        data class DeleteBookmark(val item: GithubEntity) : GithubHomeViewState()
+        object ErrorAddBookmark : GithubHomeViewState()
+        object ErrorDeleteBookmark : GithubHomeViewState()
     }
 
 }

@@ -47,7 +47,7 @@ class GithubApiFragment : BaseFragment<FragmentGithubApiBinding>(R.layout.fragme
         binding.viewModel = githubApiViewModel
 
         githubHomeViewModel.viewStateLiveData.observe(viewLifecycleOwner) { viewState: ViewState? ->
-            (viewState as? GithubHomeViewModel.GithubViewState)?.let {
+            (viewState as? GithubHomeViewModel.GithubHomeViewState)?.let {
                 onChangedHomeViewState(
                     viewState
                 )
@@ -63,13 +63,13 @@ class GithubApiFragment : BaseFragment<FragmentGithubApiBinding>(R.layout.fragme
         }
     }
 
-    private fun onChangedHomeViewState(viewState: GithubHomeViewModel.GithubViewState) {
+    private fun onChangedHomeViewState(viewState: GithubHomeViewModel.GithubHomeViewState) {
         when (viewState) {
-            is GithubHomeViewModel.GithubViewState.AddBookmark -> {
+            is GithubHomeViewModel.GithubHomeViewState.AddBookmark -> {
 
             }
 
-            is GithubHomeViewModel.GithubViewState.DeleteBookmark -> {
+            is GithubHomeViewModel.GithubHomeViewState.DeleteBookmark -> {
                 apiAdapter.updateItem(viewState.item)
             }
         }

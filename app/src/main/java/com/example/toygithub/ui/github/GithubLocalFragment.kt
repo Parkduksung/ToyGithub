@@ -48,7 +48,7 @@ class GithubLocalFragment :
         githubLocalViewModel.getAllBookmarkList()
 
         githubHomeViewModel.viewStateLiveData.observe(viewLifecycleOwner) { viewState: ViewState? ->
-            (viewState as? GithubHomeViewModel.GithubViewState)?.let {
+            (viewState as? GithubHomeViewModel.GithubHomeViewState)?.let {
                 onChangedHomeViewState(
                     viewState
                 )
@@ -64,13 +64,13 @@ class GithubLocalFragment :
         }
     }
 
-    private fun onChangedHomeViewState(viewState: GithubHomeViewModel.GithubViewState) {
+    private fun onChangedHomeViewState(viewState: GithubHomeViewModel.GithubHomeViewState) {
         when (viewState) {
-            is GithubHomeViewModel.GithubViewState.AddBookmark -> {
+            is GithubHomeViewModel.GithubHomeViewState.AddBookmark -> {
                 localAdapter.add(viewState.item)
             }
 
-            is GithubHomeViewModel.GithubViewState.DeleteBookmark -> {
+            is GithubHomeViewModel.GithubHomeViewState.DeleteBookmark -> {
                 localAdapter.delete(viewState.item)
             }
         }

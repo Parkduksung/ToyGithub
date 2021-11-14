@@ -45,7 +45,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun initViewModel() {
 
         githubHomeViewModel.viewStateLiveData.observe(this) { viewState: ViewState? ->
-            (viewState as? GithubHomeViewModel.GithubViewState)?.let {
+            (viewState as? GithubHomeViewModel.GithubHomeViewState)?.let {
                 onChangedHomeViewState(
                     viewState
                 )
@@ -53,14 +53,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }
     }
 
-    private fun onChangedHomeViewState(viewState: GithubHomeViewModel.GithubViewState) {
+    private fun onChangedHomeViewState(viewState: GithubHomeViewModel.GithubHomeViewState) {
         when (viewState) {
 
-            is GithubHomeViewModel.GithubViewState.AddBookmark -> {
+            is GithubHomeViewModel.GithubHomeViewState.AddBookmark -> {
                 Toast.makeText(this, "즐겨찾기가 추가되었습니다.", Toast.LENGTH_SHORT).show()
             }
 
-            is GithubHomeViewModel.GithubViewState.DeleteBookmark -> {
+            is GithubHomeViewModel.GithubHomeViewState.DeleteBookmark -> {
                 Toast.makeText(this, "즐겨찾기가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
             }
 
