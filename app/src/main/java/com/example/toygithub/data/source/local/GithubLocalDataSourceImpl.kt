@@ -46,7 +46,7 @@ class GithubLocalDataSourceImpl @Inject constructor(private val githubDao: Githu
                     githubDao.getBookmarkGithubEntityList(true)
                 Result.Success(getAllBookmarkList)
             } catch (e: Exception) {
-                Result.Error(Exception("bookmarkList is Null!"))
+                Result.Error(Exception("BookmarkList is Null!"))
             }
         }
 }

@@ -73,7 +73,7 @@ class GithubLocalDataSourceImplTest : BaseTest() {
 
     @Test
     fun checkGetAllBookmarkEntityFailTest() = runBlocking {
-        val exception = Exception("bookmarkList is Null!")
+        val exception = Exception("BookmarkList is Null!")
 
         val failureResult = Result.Error(exception)
 
