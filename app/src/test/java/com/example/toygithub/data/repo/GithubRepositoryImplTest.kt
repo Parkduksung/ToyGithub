@@ -101,9 +101,9 @@ class GithubRepositoryImplTest : BaseTest() {
     @Test
     fun checkGetAllBookmarkEntitySuccessTest() = runBlocking {
 
-        val mockGithubEntity = mockSearchItemList.map { it.toGithubEntity().copy(like = true) }
+        val mockGithubEntityList = mockSearchItemList.map { it.toGithubEntity().copy(like = true) }
 
-        val successResult = Result.Success(mockGithubEntity)
+        val successResult = Result.Success(mockGithubEntityList)
 
         Mockito.`when`(githubLocalDataSource.getAllBookmarkEntity()).thenReturn(successResult)
 

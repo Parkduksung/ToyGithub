@@ -1,9 +1,6 @@
 package com.example.toygithub.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import com.example.toygithub.base.BaseViewModel
 import com.example.toygithub.base.ViewState
 import com.example.toygithub.data.repo.GithubRepository
@@ -17,10 +14,9 @@ import javax.inject.Inject
 class GithubLocalViewModel @Inject constructor(
     app: Application,
     private val githubRepository: GithubRepository
-) : BaseViewModel(app), LifecycleObserver {
+) : BaseViewModel(app) {
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    private fun getAllBookmarkList() {
+    fun getAllBookmarkList() {
 
         ioScope.launch {
             when (val result = githubRepository.getAllBookmarkEntity()) {

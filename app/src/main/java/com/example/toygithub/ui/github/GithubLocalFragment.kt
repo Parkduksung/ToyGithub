@@ -42,9 +42,10 @@ class GithubLocalFragment :
     }
 
     private fun initViewModel() {
-        lifecycle.addObserver(githubLocalViewModel)
 
         binding.viewModel = githubLocalViewModel
+
+        githubLocalViewModel.getAllBookmarkList()
 
         githubHomeViewModel.viewStateLiveData.observe(viewLifecycleOwner) { viewState: ViewState? ->
             (viewState as? GithubHomeViewModel.GithubViewState)?.let {
