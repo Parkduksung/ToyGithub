@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.toygithub.ui.github.GithubLocalViewModel" />
+            type="com.example.toygithub.viewmodel.GithubLocalViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

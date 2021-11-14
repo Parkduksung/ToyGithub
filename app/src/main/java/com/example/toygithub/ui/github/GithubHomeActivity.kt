@@ -8,6 +8,7 @@ import com.example.toygithub.base.BaseActivity
 import com.example.toygithub.base.ViewState
 import com.example.toygithub.databinding.ActivityMainBinding
 import com.example.toygithub.ui.adapter.FragmentPagerAdapter
+import com.example.toygithub.viewmodel.GithubHomeViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 

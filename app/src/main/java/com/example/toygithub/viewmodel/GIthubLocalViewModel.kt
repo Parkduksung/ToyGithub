@@ -1,4 +1,4 @@
-package com.example.toygithub.ui.github
+package com.example.toygithub.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.Lifecycle

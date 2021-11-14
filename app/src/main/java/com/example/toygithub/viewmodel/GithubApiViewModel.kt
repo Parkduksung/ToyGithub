@@ -1,4 +1,4 @@
-package com.example.toygithub.ui.github
+package com.example.toygithub.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
@@ -32,7 +32,6 @@ class GithubApiViewModel @Inject constructor(
 
                             if (!searchList.isNullOrEmpty()) {
                                 val toGithubEntityList = searchList.map {
-
                                     it.toGithubEntity()
                                 }
                                 val toBookmarkGithubEntityList = toGithubEntityList.map {

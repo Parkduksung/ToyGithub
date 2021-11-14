@@ -9,6 +9,8 @@ import com.example.toygithub.base.BaseFragment
 import com.example.toygithub.base.ViewState
 import com.example.toygithub.databinding.FragmentGithubApiBinding
 import com.example.toygithub.ui.adapter.ApiAdapter
+import com.example.toygithub.viewmodel.GithubApiViewModel
+import com.example.toygithub.viewmodel.GithubHomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
