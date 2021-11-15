@@ -78,8 +78,8 @@ class GithubHomeViewModelTest : ViewModelBaseTest() {
 
         Mockito.verify(viewStateObserver)
             .onChanged(
-                GithubHomeViewModel.GithubHomeViewState.DeleteBookmark(mockGithubEntity))
-
+                GithubHomeViewModel.GithubHomeViewState.DeleteBookmark(mockGithubEntity.copy(like = false))
+            )
 
     }
 
