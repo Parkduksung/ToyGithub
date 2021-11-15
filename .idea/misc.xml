@@ -7,9 +7,11 @@
         <entry key="app/src/main/res/drawable/ic_bookmark_ok.xml" value="0.2611111111111111" />
         <entry key="app/src/main/res/drawable/selector_checkbox_bookmark.xml" value="0.2611111111111111" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/alternative_image_until_not_bring.xml" value="0.54375" />
         <entry key="app/src/main/res/layout/fragment_github_api.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_github_local.xml" value="0.2625" />
         <entry key="app/src/main/res/layout/item_api.xml" value="0.2625" />
+        <entry key="app/src/main/res/layout/item_api_title.xml" value="0.30664395229982966" />
         <entry key="app/src/main/res/layout/item_local.xml" value="0.2625" />
         <entry key="lib_base/src/main/res/layout/activity_main.xml" value="0.2484375" />
         <entry key="lib_github/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2786458333333333" />
