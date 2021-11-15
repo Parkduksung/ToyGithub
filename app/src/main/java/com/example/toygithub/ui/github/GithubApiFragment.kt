@@ -38,7 +38,6 @@ class GithubApiFragment : BaseFragment<FragmentGithubApiBinding>(R.layout.fragme
         }
         apiAdapter.setOnItemClickListener { entity, isBookmark ->
             githubApiViewModel.toggleBookmark(entity, isBookmark)
-//            apiAdapter.updateItem(entity)
         }
     }
 
@@ -65,10 +64,6 @@ class GithubApiFragment : BaseFragment<FragmentGithubApiBinding>(R.layout.fragme
 
     private fun onChangedHomeViewState(viewState: GithubHomeViewModel.GithubHomeViewState) {
         when (viewState) {
-            is GithubHomeViewModel.GithubHomeViewState.AddBookmark -> {
-
-            }
-
             is GithubHomeViewModel.GithubHomeViewState.DeleteBookmark -> {
                 apiAdapter.updateItem(viewState.item)
             }
@@ -86,6 +81,7 @@ class GithubApiFragment : BaseFragment<FragmentGithubApiBinding>(R.layout.fragme
             }
 
             is GithubApiViewModel.GithubApiViewState.GetSearchUser -> {
+                apiAdapter.clear()
                 apiAdapter.addAll(viewState.list)
             }
         }

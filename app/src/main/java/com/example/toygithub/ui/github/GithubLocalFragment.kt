@@ -8,6 +8,7 @@ import com.example.toygithub.R
 import com.example.toygithub.base.BaseFragment
 import com.example.toygithub.base.ViewState
 import com.example.toygithub.databinding.FragmentGithubLocalBinding
+import com.example.toygithub.ext.showToast
 import com.example.toygithub.ui.adapter.LocalAdapter
 import com.example.toygithub.viewmodel.GithubHomeViewModel
 import com.example.toygithub.viewmodel.GithubLocalViewModel
@@ -87,13 +88,12 @@ class GithubLocalFragment :
             }
 
             is GithubLocalViewModel.GithubLocalViewState.ErrorGetBookmarkList -> {
-
+                showToast(message = "즐겨찾기 리스트를 가져올 수 없습니다.")
             }
 
             is GithubLocalViewModel.GithubLocalViewState.EmptyGetBookmarkList -> {
 
             }
-
         }
     }
 }

@@ -1,12 +1,13 @@
 package com.example.toygithub.ui.github
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.toygithub.R
 import com.example.toygithub.base.BaseActivity
 import com.example.toygithub.base.ViewState
 import com.example.toygithub.databinding.ActivityMainBinding
+import com.example.toygithub.ext.showToast
 import com.example.toygithub.ui.adapter.FragmentPagerAdapter
 import com.example.toygithub.viewmodel.GithubHomeViewModel
 import com.google.android.material.tabs.TabLayoutMediator
@@ -28,6 +29,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         initViewModel()
     }
 
+
+    @SuppressLint("WrongConstant")
     private fun initUi() {
         val list = listOf(GithubApiFragment(), GithubLocalFragment())
 
@@ -36,7 +39,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         with(binding) {
             viewpager.apply {
                 adapter = pagerAdapter
-                offscreenPageLimit = 2
+                offscreenPageLimit = PAGE_LIMIT_COUNT
             }
             TabLayoutMediator(tablayout, viewpager, tabConfigurationStrategy).attach()
         }
@@ -57,13 +60,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         when (viewState) {
 
             is GithubHomeViewModel.GithubHomeViewState.AddBookmark -> {
-                Toast.makeText(this, "즐겨찾기가 추가되었습니다.", Toast.LENGTH_SHORT).show()
+                showToast(message = "즐겨찾기가 추가되었습니다.")
             }
 
             is GithubHomeViewModel.GithubHomeViewState.DeleteBookmark -> {
-                Toast.makeText(this, "즐겨찾기가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                showToast(message = "즐겨찾기가 삭제되었습니다.")
             }
 
         }
+    }
+
+    companion object {
+        private const val PAGE_LIMIT_COUNT = 2
     }
 }

@@ -1,6 +1,5 @@
 package com.example.toygithub.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -35,10 +34,12 @@ class ApiAdapter : RecyclerView.Adapter<ApiViewHolder>() {
     }
 
     fun updateItem(entity: GithubEntity) {
-        val searchEntity = githubEntityList.first { it.id == entity.id }
-        val index = githubEntityList.indexOf(searchEntity)
-        githubEntityList[index] = entity.copy(like = !entity.like!!)
-        notifyDataSetChanged()
+        if (githubEntityList.any { it.id == entity.id }) {
+            val searchEntity = githubEntityList.first { it.id == entity.id }
+            val index = githubEntityList.indexOf(searchEntity)
+            githubEntityList[index] = entity.copy(like = !entity.like!!)
+            notifyDataSetChanged()
+        }
     }
 
     fun clear() {
@@ -59,8 +60,6 @@ class ApiViewHolder(viewGroup: ViewGroup) :
         entity: GithubEntity,
         onItemClick: (entity: GithubEntity, isBookmark: Boolean) -> Unit
     ) {
-        Log.d("결과", "여기 다시탐??")
-        Log.d("결과", entity.like.toString())
         with(binding) {
             Glide.with(itemView.context).load(entity.avatar_url).into(image)
             user.text = entity.login
