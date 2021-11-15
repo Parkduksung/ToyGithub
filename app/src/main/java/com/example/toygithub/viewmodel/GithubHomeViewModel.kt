@@ -28,7 +28,7 @@ class GithubHomeViewModel @Inject constructor(
     fun deleteBookmark(entity: GithubEntity) {
         ioScope.launch {
             if (githubRepository.deleteGithubEntity(entity)) {
-                viewStateChanged(GithubHomeViewState.DeleteBookmark(entity))
+                viewStateChanged(GithubHomeViewState.DeleteBookmark(entity.copy(like = false)))
             } else {
                 viewStateChanged(GithubHomeViewState.ErrorDeleteBookmark)
             }

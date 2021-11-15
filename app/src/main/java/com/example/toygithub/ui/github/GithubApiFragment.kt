@@ -64,6 +64,10 @@ class GithubApiFragment : BaseFragment<FragmentGithubApiBinding>(R.layout.fragme
 
     private fun onChangedHomeViewState(viewState: GithubHomeViewModel.GithubHomeViewState) {
         when (viewState) {
+            is GithubHomeViewModel.GithubHomeViewState.AddBookmark -> {
+                apiAdapter.updateItem(viewState.item)
+            }
+
             is GithubHomeViewModel.GithubHomeViewState.DeleteBookmark -> {
                 apiAdapter.updateItem(viewState.item)
             }
