@@ -131,4 +131,7 @@ dependencies {
     //Room
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    // Room M1 apple mac Rosetta2
+    kapt 'org.xerial:sqlite-jdbc:3.34.0'
 }
