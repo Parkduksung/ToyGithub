@@ -1,6 +1,7 @@
 package com.example.toygithub.ui.github
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -38,6 +39,9 @@ class GithubApiFragment : BaseFragment<FragmentGithubApiBinding>(R.layout.fragme
         }
         apiAdapter.setOnItemClickListener { entity, isBookmark ->
             githubApiViewModel.toggleBookmark(entity, isBookmark)
+            entity.login?.let {
+                githubApiViewModel.searchUserRepos(it)
+            }
         }
     }
 
@@ -87,6 +91,12 @@ class GithubApiFragment : BaseFragment<FragmentGithubApiBinding>(R.layout.fragme
             is GithubApiViewModel.GithubApiViewState.GetSearchUser -> {
                 apiAdapter.clear()
                 apiAdapter.addAll(viewState.list)
+            }
+
+            is GithubApiViewModel.GithubApiViewState.GetUserRepos -> {
+                viewState.list.forEach {
+                    Log.d("결과", it.name)
+                }
             }
         }
     }

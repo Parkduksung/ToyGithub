@@ -1,5 +1,6 @@
 package com.example.toygithub.data.repo
 
+import com.example.toygithub.api.response.GithubRepoResponse
 import com.example.toygithub.api.response.GithubSearchResponse
 import com.example.toygithub.data.source.local.GithubLocalDataSource
 import com.example.toygithub.data.source.remote.GithubRemoteDataSource
@@ -18,6 +19,11 @@ class GithubRepositoryImpl @Inject constructor(
     override suspend fun searchUser(userId: String): Result<GithubSearchResponse> =
         withContext(Dispatchers.IO) {
             return@withContext githubRemoteDataSource.searchUser(userId)
+        }
+
+    override suspend fun searchUserRepos(userId: String): Result<GithubRepoResponse> =
+        withContext(Dispatchers.IO) {
+            return@withContext githubRemoteDataSource.searchUserRepos(userId)
         }
 
     override suspend fun registerGithubEntity(entity: GithubEntity): Boolean =
